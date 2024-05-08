@@ -80,7 +80,8 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("y", margin.top + 50)
     .attr("width", xScale.bandwidth)
     .attr("height", 100)
-    .attr("fill", (d) => colorScale(d.avg));
+    .attr("fill", (d) => colorScale(d.avg))
+    .attr("class", "rects");
 
   svg
     .append("g")
@@ -127,7 +128,7 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("x", width / 2)
     .attr("y", margin.top + 120)
     .text("Global")
-    .attr("class", "heatmap-label");
+    .attr("class", "heatmap-label Global");
 });
 
 //222222222222222222222222222222222222222222222222222222222222222//
@@ -164,7 +165,8 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("y", margin.top + 200)
     .attr("width", xScale2.bandwidth)
     .attr("height", 100)
-    .attr("fill", (d) => colorScale(d.avg));
+    .attr("fill", (d) => colorScale(d.avg))
+    .attr("class", "rects2");
 
   // svg
   //   .append("g")
@@ -178,7 +180,7 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("x", width / 2)
     .attr("y", margin.top + 270)
     .text("Northern hemisphere")
-    .attr("class", "heatmap-label");
+    .attr("class", "heatmap-label Northern-hemisphere");
 });
 
 //33333333333333333333333333333333333333333333333333333333333333//
@@ -216,7 +218,8 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("y", margin.top + 350)
     .attr("width", xScale3.bandwidth)
     .attr("height", 100)
-    .attr("fill", (d) => colorScale(d.avg));
+    .attr("fill", (d) => colorScale(d.avg))
+    .attr("class", "rects3");
 
   // svg
   //   .append("g")
@@ -230,9 +233,35 @@ d3.csv("data/temperature-anomaly-data.csv").then((raw_data) => {
     .attr("x", width / 2)
     .attr("y", margin.top + 420)
     .text("Southern hemisphere")
-    .attr("class", "heatmap-label");
-});
+    .attr("class", "heatmap-label Southern-hemisphere");
 
+  ////////////////////////////////////////////////////////////////////
+  //////////////////////////  Mouseover  /////////////////////////////
+
+  rects
+    .on("mouseover", function () {
+      d3.select(".heatmap-label.Global").style("fill", "black");
+    })
+    .on("mouseout", function () {
+      d3.select(".heatmap-label.Global").style("fill", "white");
+    });
+
+  rects2
+    .on("mouseover", function () {
+      d3.select(".heatmap-label.Northern-hemisphere").style("fill", "black");
+    })
+    .on("mouseout", function () {
+      d3.select(".heatmap-label.Northern-hemisphere").style("fill", "white");
+    });
+
+  rects3
+    .on("mouseover", function () {
+      d3.select(".heatmap-label.Southern-hemisphere").style("fill", "black");
+    })
+    .on("mouseout", function () {
+      d3.select(".heatmap-label.Southern-hemisphere").style("fill", "white");
+    });
+});
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////  Resize  //////////////////////////////
 window.addEventListener("resize", () => {
